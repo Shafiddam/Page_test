@@ -1,5 +1,6 @@
 from time import sleep
 from .pages.main_page import MainPage
+from pages.login_page import LoginPage
 
 
 def test_guest_can_go_to_login_page(browser):
@@ -16,3 +17,27 @@ def test_guest_should_see_login_link(browser):
     page.open()
     # sleep(2)  # добавил паузу для наглядности
     page.should_be_login_link()
+
+
+def test_guest_should_be_login_url(browser):
+    link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+    page = LoginPage(browser, link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+    page.open()                      # открываем страницу
+    # sleep(1)                       # добавил паузу для наглядности
+    page.should_be_login_url()
+
+
+def should_be_login_form():
+    link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+    page = LoginPage(browser, link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+    page.open()  # открываем страницу
+    # sleep(1)                       # добавил паузу для наглядности
+    page.should_be_login_form()
+
+
+def should_be_register_form():
+    link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+    page = LoginPage(browser, link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+    page.open()  # открываем страницу
+    # sleep(1)                       # добавил паузу для наглядности
+    page.should_be_register_form()
