@@ -11,6 +11,7 @@ import pytest
 # третий линк (без промо-акций), для ОТРИЦАТЕЛЬНЫХ проверок :
 LINK = 'http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207'
 
+
 @pytest.mark.skip
 # @pytest.mark.parametrize('LINK', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
 #                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
@@ -30,7 +31,8 @@ def test_guest_can_add_product_to_basket(browser, LINK):
         Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили.
         2)Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара.
     """
-    page = ProductPage(browser, LINK)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+    page = ProductPage(browser,
+                       LINK)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
     page.open()  # открываем страницу
     page.add_product_to_basket()
     page.solve_quiz_and_get_code()
@@ -46,6 +48,7 @@ def test_guest_can_add_product_to_basket(browser, LINK):
     page.should_be_price_of_product()
 
 
+@pytest.mark.xfail
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     """
         Открываем страницу товара
@@ -70,6 +73,7 @@ def test_guest_cant_see_success_message(browser):
     # time.sleep(5)
 
 
+@pytest.mark.xfail
 def test_message_disappeared_after_adding_product_to_basket(browser):
     """
         Открываем страницу товара
@@ -80,16 +84,6 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.open()
     page.add_product_to_basket()
     page.message_disappeared_after_adding_product_to_basket()
-
-
-
-
-
-
-
-
-
-
 
 
 
