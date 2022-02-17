@@ -86,12 +86,35 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.message_disappeared_after_adding_product_to_basket()
 
 
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 '''
 # ниже 5 тестов, но вставил их в один тест "test_guest_can_add_product_to_basket", 
 # промаркирую их skip'ом для пропуска
-
 @pytest.mark.skip
 def test_should_be_add_to_basket_button(browser):
     page = ProductPage(browser, LINK)
@@ -99,8 +122,6 @@ def test_should_be_add_to_basket_button(browser):
     page.add_product_to_basket()
     page.solve_quiz_and_get_code()
     page.should_be_add_to_basket_button()
-
-
 @pytest.mark.skip
 def test_should_be_name_of_product(browser):
     page = ProductPage(browser, LINK)
@@ -108,8 +129,6 @@ def test_should_be_name_of_product(browser):
     page.add_product_to_basket()
     page.solve_quiz_and_get_code()
     page.should_be_name_of_product()
-
-
 @pytest.mark.skip
 def test_compare_basket_and_product_price(browser):
     page = ProductPage(browser, LINK)
@@ -117,8 +136,6 @@ def test_compare_basket_and_product_price(browser):
     page.add_product_to_basket()
     page.solve_quiz_and_get_code()
     page.compare_basket_and_product_price()
-
-
 @pytest.mark.skip
 def test_should_be_msg_about_adding(browser):
     page = ProductPage(browser, LINK)
@@ -126,8 +143,6 @@ def test_should_be_msg_about_adding(browser):
     page.add_product_to_basket()
     page.solve_quiz_and_get_code()
     page.should_be_msg_about_adding()
-
-
 @pytest.mark.skip
 def test_should_be_price_of_product(browser):
     page = ProductPage(browser, LINK)
