@@ -1,7 +1,6 @@
 import time
-from .pages.main_page import MainPage
 from .pages.product_page import ProductPage
-from .pages.base_page import BasePage
+from .pages.basket_page import BasketPage
 import pytest
 
 # первый линк:
@@ -31,20 +30,15 @@ def test_guest_can_add_product_to_basket(browser, LINK):
         Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили.
         2)Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара.
     """
-    page = ProductPage(browser,
-                       LINK)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+    page = ProductPage(browser, LINK)  # инициализируем Page Object,
+    # передаем в конструктор экземпляр драйвера и url адрес
     page.open()  # открываем страницу
     page.add_product_to_basket()
     page.solve_quiz_and_get_code()
-    print("\n TEST #SHOULD_BE_MSG_ABOUT_ADDING")
     page.should_be_msg_about_adding()
-    print("\n TEST #SHOULD_BE_ADD_TO_BASKET_BUTTON")
     page.should_be_add_to_basket_button()
-    print("\n TEST #SHOULD_BE_NAME_OF_PRODUCT")
     page.should_be_name_of_product()
-    print("\n TEST #COMPARE_BASKET_AND_PRODUCT_PRICE")
     page.compare_basket_and_product_price()
-    print("\n TEST #SHOULD_BE_PRICE_OF_PRODUCT")
     page.should_be_price_of_product()
 
 
@@ -59,7 +53,6 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page.open()
     page.add_product_to_basket()
     page.should_not_be_success_message()
-    # time.sleep(5)
 
 
 def test_guest_cant_see_success_message(browser):
@@ -70,7 +63,6 @@ def test_guest_cant_see_success_message(browser):
     page = ProductPage(browser, LINK)
     page.open()
     page.should_not_be_success_message()
-    # time.sleep(5)
 
 
 @pytest.mark.xfail
@@ -100,54 +92,16 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.go_to_login_page()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-# ниже 5 тестов, но вставил их в один тест "test_guest_can_add_product_to_basket", 
-# промаркирую их skip'ом для пропуска
-@pytest.mark.skip
-def test_should_be_add_to_basket_button(browser):
-    page = ProductPage(browser, LINK)
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    """
+    Гость открывает страницу товара
+    Переходит в корзину по кнопке в шапке
+    Ожидаем, что в корзине нет товаров
+    Ожидаем, что есть текст о том что корзина пуста
+    """
+    link = 'http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/'
+    page = BasketPage(browser, link)
     page.open()
-    page.add_product_to_basket()
-    page.solve_quiz_and_get_code()
-    page.should_be_add_to_basket_button()
-@pytest.mark.skip
-def test_should_be_name_of_product(browser):
-    page = ProductPage(browser, LINK)
-    page.open()
-    page.add_product_to_basket()
-    page.solve_quiz_and_get_code()
-    page.should_be_name_of_product()
-@pytest.mark.skip
-def test_compare_basket_and_product_price(browser):
-    page = ProductPage(browser, LINK)
-    page.open()
-    page.add_product_to_basket()
-    page.solve_quiz_and_get_code()
-    page.compare_basket_and_product_price()
-@pytest.mark.skip
-def test_should_be_msg_about_adding(browser):
-    page = ProductPage(browser, LINK)
-    page.open()
-    page.add_product_to_basket()
-    page.solve_quiz_and_get_code()
-    page.should_be_msg_about_adding()
-@pytest.mark.skip
-def test_should_be_price_of_product(browser):
-    page = ProductPage(browser, LINK)
-    page.open()
-    page.add_product_to_basket()
-    page.solve_quiz_and_get_code()
-    page.should_be_price_of_product()
-'''
+    page.go_to_basket()
+    page.should_be_basket_empty()
+    page.should_be_text_basket_empty()
