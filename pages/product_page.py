@@ -24,10 +24,11 @@ class ProductPage(BasePage):
         assert self.is_element_present(*ProductPageLocators.BTN_ADD_TO_BASKET), "BTN_ADD_TO_BASKET NOT FOUND"
 
     def should_be_name_of_product(self):
-        """ Проверка наличия имени продукта(товара) """
+        """ Проверка наличия имени товара """
         assert self.browser.find_element(*ProductPageLocators.PRODUCT_NAME), "PRODUCT NAME NOT FOUND"
 
     def should_be_price_of_product(self):
+        """ Проверка наличия цены товара """
         assert self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE), "PRODUCT PRICE NOT FOUND"
 
     def should_be_msg_about_adding(self):
