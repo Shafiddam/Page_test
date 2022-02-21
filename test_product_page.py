@@ -1,4 +1,3 @@
-import time
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
 import pytest
@@ -24,11 +23,11 @@ LINK = 'http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207'
 #                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"])
 def test_guest_can_add_product_to_basket(browser, LINK):
     """
-        Проверка нажатия на кнопку ADD_TO_BASKET_BUTTON
-        Ожидаемый результат:
-        1)Сообщение о том, что товар добавлен в корзину.
-        Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили.
-        2)Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара.
+    Проверка нажатия на кнопку ADD_TO_BASKET_BUTTON
+    Ожидаемый результат:
+    1) Сообщение о том, что товар добавлен в корзину.
+    Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили.
+    2) Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара.
     """
     page = ProductPage(browser, LINK)  # инициализируем Page Object,
     # передаем в конструктор экземпляр драйвера и url адрес
@@ -45,9 +44,9 @@ def test_guest_can_add_product_to_basket(browser, LINK):
 @pytest.mark.xfail
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     """
-        Открываем страницу товара
-        Добавляем товар в корзину
-        Проверяем, что нет сообщения об успехе с помощью is_not_element_present
+    Открываем страницу товара
+    Добавляем товар в корзину
+    Проверяем, что нет сообщения об успехе с помощью is_not_element_present
     """
     page = ProductPage(browser, LINK)
     page.open()
@@ -57,8 +56,8 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
 
 def test_guest_cant_see_success_message(browser):
     """
-        Открываем страницу товара
-        Проверяем, что нет сообщения об успехе с помощью is_not_element_present
+    Открываем страницу товара
+    Проверяем, что нет сообщения об успехе с помощью is_not_element_present
     """
     page = ProductPage(browser, LINK)
     page.open()
@@ -68,9 +67,9 @@ def test_guest_cant_see_success_message(browser):
 @pytest.mark.xfail
 def test_message_disappeared_after_adding_product_to_basket(browser):
     """
-        Открываем страницу товара
-        Добавляем товар в корзину
-        Проверяем, что нет сообщения об успехе с помощью is_disappeared
+    Открываем страницу товара
+    Добавляем товар в корзину
+    Проверяем, что нет сообщения об успехе с помощью is_disappeared
     """
     page = ProductPage(browser, LINK)
     page.open()
@@ -79,6 +78,11 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
 
 
 def test_guest_should_see_login_link_on_product_page(browser):
+    """
+    Тест, что гость видит кнопку "login" со страницы товара:
+    Открываем страницу товара.
+    Проверяем, что есть кнопка логина на этой странице.
+    """
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
@@ -86,6 +90,11 @@ def test_guest_should_see_login_link_on_product_page(browser):
 
 
 def test_guest_can_go_to_login_page_from_product_page(browser):
+    """
+    Тест, что гость может перейти на страницу регистрации со страницы товара:
+    Открываем страницу товара.
+    Переходим на страницу регистрации.
+    """
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
@@ -94,6 +103,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
 
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     """
+    Тест, что гость видит товар в Корзине, открытой из страницы товара:
     Гость открывает страницу товара
     Переходит в корзину по кнопке в шапке
     Ожидаем, что в корзине нет товаров
