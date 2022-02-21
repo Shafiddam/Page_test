@@ -18,6 +18,7 @@ class BasePage():
         self.url = url
 
     def go_to_login_page(self):
+        """ Кликаем на кнопку логина. """
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
