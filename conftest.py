@@ -5,6 +5,7 @@ from time import sleep
 
 
 def pytest_addoption(parser):
+    """ Настраиваем тестовые окружения с помощью передачи параметров через командную строку."""
     parser.addoption('--browser_name', action='store', default=None,
                      help="Choose browser: chrome or firefox")
 
