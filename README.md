@@ -1,5 +1,6 @@
 # Page_test
-Testing Pages from Stepik_org (тестинг страниц, паттерны Page Object):
+Testing Pages from Stepik_org_Page Object: 
+Windows 10, Python 3.10, Google Chrome 98.0.4758.102
 
 base_page.py
   """
