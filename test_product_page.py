@@ -1,5 +1,3 @@
-from time import sleep
-
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
 from .pages.login_page import LoginPage
@@ -135,6 +133,7 @@ class TestUserAddToBasketFromProductPage():
         page.register_new_user(email, password)
         page.should_be_authorized_user()
 
+    @pytest.mark.need_review
     def test_user_cant_see_success_message(browser):
         """
         Открываем страницу товара
@@ -162,13 +161,4 @@ class TestUserAddToBasketFromProductPage():
         page.should_be_name_of_product()
         page.compare_basket_and_product_price()
         page.should_be_price_of_product()
-
-#
-# def test_temp1(browser, email=None, password=None):
-#     login_link = 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/'
-#     page = LoginPage(browser, login_link)
-#     page.open()
-#     page.register_new_user(email, password)
-#     sleep(2)
-#     page.should_be_authorized_user()
 
