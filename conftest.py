@@ -1,24 +1,24 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from time import sleep
 
 
 def pytest_addoption(parser):
     """ Настраиваем тестовые окружения с помощью передачи параметров через командную строку."""
-    parser.addoption('--browser_name', action='store', default=None,
+    parser.addoption('--browser_name', action='store', default='chrome',
                      help="Choose browser: chrome or firefox")
+    parser.addoption('--language', action='store', default='en',
+                     help="CHOOSE LANGUAGE: en or ru")
 
 
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
-    browser = None
+    user_language = request.config.getoption("language")
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
         options = Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': 'user_language'})
-        # options.add_experimental_option('prefs', {'intl.accept_languages': ''})
         browser = webdriver.Chrome(options=options)
 
     elif browser_name == "firefox":
@@ -30,5 +30,4 @@ def browser(request):
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser
     print("\nquit browser..")
-    # sleep(800) # пауза для отладки
     browser.quit()
